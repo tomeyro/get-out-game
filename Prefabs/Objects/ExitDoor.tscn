@@ -1,0 +1,177 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/Sfx/beeperror.wav" type="AudioStream" id=1]
+[ext_resource path="res://Prefabs/Objects/ExitDoor.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sfx/computerchirp.wav" type="AudioStream" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.219608, 0.247059, 0.25098, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 1, 1.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=3]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.596078, 0.639216, 0.647059, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 3 )
+size = Vector3( 0.05, 0.2, 0.2 )
+
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 3 )
+size = Vector3( 0.15, 0.2, 0.2 )
+
+[sub_resource type="CubeMesh" id=6]
+material = SubResource( 3 )
+size = Vector3( 0.75, 0.3, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=7]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.141176, 0.176471, 0.176471, 1 )
+
+[sub_resource type="CubeMesh" id=8]
+material = SubResource( 7 )
+size = Vector3( 0.025, 0.025, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=9]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.843137, 0.0941176, 0.0941176, 1 )
+
+[sub_resource type="CubeMesh" id=10]
+material = SubResource( 9 )
+size = Vector3( 0.1, 0.025, 0.2 )
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="Animation" id=12]
+resource_name = "Exit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("MeshInstance/MeshInstance12:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.843137, 0.0941176, 0.0941176, 1 ), Color( 0.384314, 1, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sfx/Chirp:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="ExitDoor" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.425919, 0, -0.193679 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302249, 0, -0.193679 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="MeshInstance13" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0161191, 0.499067, -0.193679 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264858, -0.0525844, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance4" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302238, -0.0525844, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance5" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.339107, -0.0525844, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance6" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.339107, -0.00539625, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance7" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.294862, -0.00539625, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance8" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255521, -0.00539625, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance9" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255521, 0.0315596, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance10" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.294921, 0.0315596, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance11" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.338966, 0.0315596, -0.214506 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="MeshInstance12" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.300034, 0.0704964, -0.214506 )
+mesh = SubResource( 10 )
+material/0 = null
+
+[node name="PlayerDetector" type="Area" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerDetector"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 11 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Exit = SubResource( 12 )
+
+[node name="Sfx" type="Spatial" parent="."]
+
+[node name="Error" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 1 )
+volume_db = -7.0
+pitch_scale = 0.75
+
+[node name="Chirp" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 3 )
+pitch_scale = 1.5
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Prefabs/Objects/CardKey.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sfx/pickup.wav" type="AudioStream" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.352941, 0.537255, 0.27451, 1 )
+
+[sub_resource type="CubeMesh" id=1]
+material = SubResource( 3 )
+size = Vector3( 1, 0.6, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=4]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 4 )
+size = Vector3( 1.1, 0.1, 0.11 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "CardKey"
+length = 1.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("CardKeyMeshes:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 1, 0.5, 1 )
+
+[node name="CardKey" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="CardKeyMeshes" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="CardKeyMeshes"]
+transform = Transform( 0.569853, -0.821746, 0, 0.504017, 0.349519, 0.789813, -0.649026, -0.450077, 0.613348, 0, 0.726513, -0.0479775 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="CardKeyMeshes"]
+transform = Transform( 0.569853, -0.821746, 0, 0.504017, 0.349519, 0.789813, -0.649026, -0.450077, 0.613348, 0.174513, 0.651996, 0.0479775 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "CardKey"
+anims/CardKey = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 6 )
+
+[node name="PlayerDetector" type="Area" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerDetector"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+shape = SubResource( 7 )
+
+[node name="Sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -5.0
+pitch_scale = 1.25
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

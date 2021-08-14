@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Prefabs/Rooms/BaseRoomMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Prefabs/Rooms/BaseRoom.cs" type="Script" id=2]
+[ext_resource path="res://Assets/MeshLib.tres" type="MeshLibrary" id=3]
+
+[sub_resource type="PlaneMesh" id=1]
+material = ExtResource( 1 )
+size = Vector2( 16, 16 )
+
+[sub_resource type="SpatialMaterial" id=5]
+params_diffuse_mode = 4
+params_specular_mode = 3
+albedo_color = Color( 0.831373, 0.188235, 0.294118, 1 )
+emission_enabled = true
+emission = Color( 0.929412, 0.101961, 0.0666667, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="CapsuleMesh" id=3]
+material = SubResource( 5 )
+radius = 0.1
+mid_height = 0.1
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 8, 0.5, 8 )
+
+[node name="BaseRoom" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Floor" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="DoorPositions" type="Spatial" parent="."]
+
+[node name="Up" type="Spatial" parent="DoorPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8 )
+
+[node name="Right" type="Spatial" parent="DoorPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0 )
+
+[node name="Down" type="Spatial" parent="DoorPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
+
+[node name="Left" type="Spatial" parent="DoorPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0 )
+
+[node name="Objects" type="Spatial" parent="."]
+
+[node name="Lamps" type="Spatial" parent="Objects"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="Middle" type="Spatial" parent="Objects/Lamps"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00422478, 0.0493703, 0.0186329 )
+
+[node name="OmniLight" type="OmniLight" parent="Objects/Lamps/Middle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.74487, 0 )
+layers = 524288
+shadow_enabled = true
+shadow_color = Color( 0, 0.835294, 1, 1 )
+omni_range = 11.3
+
+[node name="FakeLamps" type="Spatial" parent="Objects"]
+
+[node name="Lamp" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 1.5, 8.025 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lamp2" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1, 1.5, 8.025 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lamp3" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 1.5, -7.975 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lamp4" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1, 1.5, -7.975 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lamp5" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 8.025, 1.5, 1 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lamp6" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 8.025, 1.5, -1 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lamp7" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.975, 1.5, 1 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="Lamp8" type="MeshInstance" parent="Objects/FakeLamps"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.975, 1.5, -1 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="PlayerDetector" type="Area" parent="."]
+visible = false
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="PlayerDetector"]
+shape = SubResource( 4 )
+
+[node name="Walls" type="GridMap" parent="."]
+mesh_library = ExtResource( 3 )
+cell_size = Vector3( 0.5, 0.5, 0.5 )
+cell_center_x = false
+cell_center_y = false
+cell_center_z = false
+cell_scale = 0.5
+collision_layer = 4
+collision_mask = 0
+data = {
+"cells": PoolIntArray( 65553, 0, 536870912, 131055, 0, -1073741824, 196625, 0, 0, 262127, 0, 0, 65553, 1, 536870912, 131055, 1, 536870912, 196625, 1, 536870912, 262127, 1, 536870912, 65553, 2, 536870912, 131055, 2, 0, 196625, 2, 0, 262127, 2, 536870912, 65553, 3, 536870912, 131055, 3, 536870912, 196625, 3, 536870912, 262127, 3, 536870912, 65553, 4, 536870912, 131055, 4, 536870912, 196625, 4, 536870912, 262127, 4, 536870912, 65553, 5, 536870912, 131055, 5, 536870912, 196625, 5, 536870912, 262127, 5, 536870912, 65553, 6, 536870912, 131055, 6, 536870912, 196625, 6, 536870912, 262127, 6, 536870912, 65553, 7, 536870912, 131055, 7, 536870912, 196625, 7, 0, 262127, 7, 536870912, 65553, 8, 536870912, 131055, 8, 536870912, 196625, 8, 536870912, 262127, 8, 536870912, 65553, 9, 536870912, 131055, 9, 536870912, 196625, 9, 536870912, 262127, 9, 536870912, 65553, 10, 536870912, 131055, 10, 536870912, 196625, 10, 0, 262127, 10, 536870912, 131055, 11, 536870912, 262127, 11, 536870912, 65553, 12, 536870912, 131055, 12, 536870912, 196625, 12, 536870912, 262127, 12, 536870912, 131055, 13, -1073741824, 262127, 13, 536870912, 65553, 14, -1610612736, 196625, 14, 536870912, 131055, 15, 0, 262127, 15, 536870912, 65553, 16, 536870912, 196625, 16, 536870912, 65536, 17, 0, 65537, 17, -1073741824, 65538, 17, 536870912, 65539, 17, -1073741824, 65540, 17, 0, 65541, 17, 0, 65542, 17, 0, 65543, 17, 0, 65544, 17, 0, 65546, 17, -1073741824, 65547, 17, 0, 65548, 17, 536870912, 65549, 17, 536870912, 65551, 17, 0, 65552, 17, 536870912, 65553, 17, 536870912, 131055, 17, -1073741824, 131056, 17, -1073741824, 131057, 17, 0, 131058, 17, 0, 131059, 17, 0, 131060, 17, 0, 131061, 17, -1073741824, 131062, 17, 0, 131063, 17, -1073741824, 131064, 17, 0, 131065, 17, 0, 131066, 17, 0, 131067, 17, 536870912, 131068, 17, 0, 131069, 17, -1610612736, 131070, 17, 0, 131071, 17, 536870912, 196608, 17, 0, 196609, 17, 0, 196610, 17, 0, 196611, 17, -1610612736, 196612, 17, 0, 196613, 17, 0, 196614, 17, -1610612736, 196615, 17, 0, 196616, 17, 0, 196618, 17, 0, 196619, 17, 536870912, 196620, 17, 536870912, 196621, 17, 0, 196623, 17, 0, 196624, 17, 0, 196625, 17, -1073741824, 262127, 17, 1073741824, 262128, 17, 0, 262129, 17, -1073741824, 262130, 17, 0, 262131, 17, 0, 262132, 17, 536870912, 262133, 17, 0, 262134, 17, 0, 262135, 17, 0, 262136, 17, 536870912, 262137, 17, 536870912, 262138, 17, 0, 262139, 17, 536870912, 262140, 17, -1073741824, 262141, 17, 0, 262142, 17, 0, 262143, 17, -1073741824, 65536, 65519, -1610612736, 65537, 65519, 536870912, 65538, 65519, 0, 65539, 65519, -1073741824, 65540, 65519, 0, 65541, 65519, 536870912, 65542, 65519, 0, 65543, 65519, 0, 65544, 65519, 0, 65545, 65519, 0, 65546, 65519, 0, 65547, 65519, 0, 65548, 65519, 0, 65549, 65519, 0, 65550, 65519, 0, 65551, 65519, 0, 65553, 65519, 0, 131055, 65519, 0, 131056, 65519, 0, 131057, 65519, 0, 131058, 65519, 0, 131059, 65519, 0, 131060, 65519, 0, 131061, 65519, 0, 131062, 65519, 536870912, 131063, 65519, -1073741824, 131064, 65519, 0, 131065, 65519, 0, 131066, 65519, -1073741824, 131067, 65519, 0, 131068, 65519, 0, 131069, 65519, 0, 131070, 65519, 0, 131071, 65519, 0, 196608, 65519, 0, 196609, 65519, 0, 196610, 65519, 0, 196611, 65519, 0, 196612, 65519, 0, 196613, 65519, 0, 196614, 65519, 0, 196615, 65519, 0, 196616, 65519, 0, 196617, 65519, 0, 196618, 65519, 0, 196619, 65519, 0, 196620, 65519, 0, 196621, 65519, 0, 196622, 65519, 0, 196623, 65519, 0, 196625, 65519, 0, 262127, 65519, 0, 262128, 65519, 0, 262129, 65519, 0, 262130, 65519, 0, 262131, 65519, 0, 262132, 65519, 0, 262133, 65519, 0, 262134, 65519, 0, 262135, 65519, 0, 262136, 65519, 0, 262137, 65519, 0, 262138, 65519, 0, 262139, 65519, 0, 262140, 65519, 0, 262141, 65519, 0, 262142, 65519, 0, 262143, 65519, 0, 131055, 65520, 0, 262127, 65520, 0, 65553, 65521, 0, 131055, 65521, 0, 196625, 65521, 0, 262127, 65521, 0, 65553, 65522, 0, 131055, 65522, 0, 196625, 65522, 0, 262127, 65522, 0, 131055, 65523, 0, 196625, 65523, 0, 262127, 65523, 0, 65553, 65524, 0, 131055, 65524, 0, 196625, 65524, 0, 262127, 65524, 0, 131055, 65525, 0, 196625, 65525, 0, 262127, 65525, 0, 65553, 65526, 0, 131055, 65526, 0, 196625, 65526, 0, 262127, 65526, 0, 65553, 65527, 0, 131055, 65527, 0, 196625, 65527, 0, 262127, 65527, 0, 65553, 65528, 0, 131055, 65528, 0, 196625, 65528, 536870912, 262127, 65528, 0, 65553, 65529, 0, 131055, 65529, 0, 196625, 65529, 0, 262127, 65529, 0, 65553, 65530, 536870912, 131055, 65530, 0, 196625, 65530, 0, 262127, 65530, 536870912, 65553, 65531, 0, 196625, 65531, 0, 65553, 65532, 0, 131055, 65532, 0, 196625, 65532, 0, 262127, 65532, 0, 65553, 65533, 0, 131055, 65533, 0, 196625, 65533, 0, 262127, 65533, 0, 65553, 65534, 0, 131055, 65534, 0, 196625, 65534, 0, 262127, 65534, 0, 65553, 65535, 0, 131055, 65535, 0, 196625, 65535, 0, 262127, 65535, 0 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 3, 0 )
+}
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
+[connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

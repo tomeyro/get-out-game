@@ -1,0 +1,252 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Assets/Sfx/ruckus3.wav" type="AudioStream" id=1]
+[ext_resource path="res://Scenes/CameraFollow.cs" type="Script" id=2]
+[ext_resource path="res://Prefabs/Characters/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Rooms/EndingRoom.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/EndingScene.cs" type="Script" id=5]
+[ext_resource path="res://Assets/Sfx/cameraflash.wav" type="AudioStream" id=6]
+[ext_resource path="res://Scenes/Text3D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Sfx/ruckus2.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sfx/ruckus.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sfx/ruckus4.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Fonts/CutiveMono-Regular.ttf" type="DynamicFontData" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 11 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[sub_resource type="Animation" id=3]
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 5.2, 5.4, 6.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sfx/Flash:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sfx/Steps2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sfx/Steps3:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sfx/Steps4:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sfx/Steps:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Control/Are you sure about that\?:custom_colors/font_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Ending" type="Spatial"]
+script = ExtResource( 5 )
+
+[node name="EndingRoom" parent="." instance=ExtResource( 4 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.49638, 0, 0 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.10924, 13, 0 )
+script = ExtResource( 2 )
+
+[node name="EndingNotHacked" type="Spatial" parent="."]
+visible = false
+
+[node name="Label" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, -2.88395, 1, -2.01396 )
+Text = "I'm finally out!"
+
+[node name="Label2" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 1.70117, 0.576572, 1.44782 )
+Text = "Though I couldn't hack that computer..."
+
+[node name="Label3" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 7.38581, 1.03714, -1.61776 )
+Text = "Well, that doesn't matter now."
+
+[node name="Label4" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 14.1692, 0.665716, 1.59997 )
+Text = "If \"La resistencia\" won't take me in..."
+
+[node name="Label5" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 19.8828, 1.18572, -1.90737 )
+Text = "...then I will survive on my own!"
+
+[node name="Label6" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 27.1083, 0.80686, 1.39481 )
+Text = "Like I always have..."
+
+[node name="Label7" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 32.8067, 0.80686, -1.57726 )
+Text = "Whoever they are... How did they even find me?"
+
+[node name="Label8" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 41.0078, 0.80686, 1.61569 )
+Text = "Whatever.. I'm out of here!"
+
+[node name="Label9" parent="EndingNotHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 48.2741, 0.80686, -1.70892 )
+Text = "I'M FREE!!!!"
+
+[node name="EndingHacked" type="Spatial" parent="."]
+visible = false
+
+[node name="Label" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, -2.88395, 1, -2.01396 )
+Text = "I'm finally out!"
+
+[node name="Label2" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 1.70117, 0.576572, 1.44782 )
+Text = "And I was able to hack into the mainframe..."
+
+[node name="Label3" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 7.38581, 1.03714, -1.61776 )
+Text = "...and steal those documents!"
+
+[node name="Label4" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 14.1692, 0.665716, 1.59997 )
+Text = "Though I'm not really sure what those contain."
+
+[node name="Label5" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 19.8828, 1.18572, -1.90737 )
+Text = "\"La resistencia\" should explain later."
+
+[node name="Label6" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 27.1083, 0.80686, 1.39481 )
+Text = "But... Who are they? How did they find me?"
+
+[node name="Label7" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 32.8067, 0.80686, -1.57726 )
+Text = "Well.. That doesn't matter now."
+
+[node name="Label8" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 41.0078, 0.80686, 1.61569 )
+Text = "I'm out of here!"
+
+[node name="Label9" parent="EndingHacked" instance=ExtResource( 7 )]
+transform = Transform( 3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 48.2741, 0.80686, -1.70892 )
+Text = "I'M FREE!!!!"
+
+[node name="Control" type="Control" parent="."]
+margin_right = 800.0
+margin_bottom = 800.0
+theme = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+margin_right = 800.0
+margin_bottom = 800.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Are you sure about that\?" type="Label" parent="Control"]
+margin_left = 220.078
+margin_top = 352.058
+margin_right = 580.078
+margin_bottom = 380.058
+custom_colors/font_color = Color( 1, 1, 1, 0 )
+text = "Are you sure about that?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Ending = SubResource( 3 )
+
+[node name="Sfx" type="Spatial" parent="."]
+
+[node name="Steps" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 9 )
+volume_db = -5.0
+pitch_scale = 1.4
+
+[node name="Steps2" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 8 )
+volume_db = -5.0
+pitch_scale = 1.4
+
+[node name="Steps3" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 1 )
+volume_db = -5.0
+pitch_scale = 1.4
+
+[node name="Steps4" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 10 )
+volume_db = -5.0
+pitch_scale = 1.4
+
+[node name="Flash" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource( 6 )

@@ -1,0 +1,5 @@
+*mono_crash*
+*.import
+Build/*
+output.mlpd
+.mono/*
